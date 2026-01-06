@@ -22,4 +22,9 @@ public class SaveEmployeeController {
 
     }
 
+    @FXML
+    void back(ActionEvent event) {
+
+    }
+
 }
