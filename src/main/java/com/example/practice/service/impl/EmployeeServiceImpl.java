@@ -37,4 +37,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<EmployeeDto> getAllEmployees() {
         return List.of();
     }
+
+    @Override
+    public boolean deleteEmployee(String nic) {
+        String sql = "delete from employee where employee_nic = ?";
+
+        try {
+            Connection conn = DBConnection.getInstance().getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, nic);
+
+            int affectedRows = pst.executeUpdate();
+
+            return affectedRows > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
