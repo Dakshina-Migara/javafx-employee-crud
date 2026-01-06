@@ -7,6 +7,7 @@ import com.example.practice.service.EmployeeService;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeService {
@@ -35,7 +36,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeDto> getAllEmployees() {
-        return List.of();
+        String sql = "SELECT * FROM employee";
+        List<EmployeeDto> employees = new ArrayList<>();
+
+        try {
+            Connection conn = DBConnection.getInstance().getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            var rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString("employee_name");
+                String nic = rs.getString("employee_nic");
+                int age = rs.getInt("employee_age");
+                double salary = rs.getDouble("employee_salary");
+
+                EmployeeDto employee = new EmployeeDto(name, nic, age, salary);
+                employees.add(employee);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return employees;
     }
 
     @Override
