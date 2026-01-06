@@ -4,8 +4,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practice.controller.DeleteEmployeeController">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practice.controller.DeleteEmployeeController">
    <children>
       <TextField fx:id="txtNic" layoutX="79.0" layoutY="135.0" prefHeight="25.0" prefWidth="440.0" promptText="enter the nic" />
       <Button layoutX="221.0" layoutY="238.0" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="148.0" text="Delete" />

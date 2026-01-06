@@ -8,7 +8,7 @@ The application allows users to **save, update, delete, search, and view all emp
 - Add new employees
 - Update existing employee details
 - Delete employees
-- Search employees by ID
+- Search employees by NIC
 - View all employees
 - Simple and user-friendly JavaFX UI
 
