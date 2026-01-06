@@ -11,4 +11,8 @@ public interface EmployeeService {
     List<EmployeeDto> getAllEmployees();
 
     boolean deleteEmployee(String nic);
+
+    boolean updateEmployee(EmployeeDto employeeDto);
+
+    EmployeeDto getEmployeeByNic(String nic);
 }
