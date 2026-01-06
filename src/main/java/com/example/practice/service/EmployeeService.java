@@ -9,4 +9,6 @@ public interface EmployeeService {
     EmployeeDto saveEmployee(EmployeeDto employeeDto);
 
     List<EmployeeDto> getAllEmployees();
+
+    boolean deleteEmployee(String nic);
 }
