@@ -4,13 +4,13 @@ public class EmployeeDto {
     private String name;
     private String nic;
     private int age;
-    private boolean salary;
+    private double salary;
 
-    public EmployeeDto(String name, String nic, int age, boolean salary) {
-        this.name = name;
-        this.nic = nic;
-        this.age = age;
-        this.salary = salary;
+    public EmployeeDto(String name, String nic, int age, double salary) {
+        this.setName(name);
+        this.setNic(nic);
+        this.setAge(age);
+       this.setSalary(salary);
     }
 
     public EmployeeDto() {
@@ -40,11 +40,11 @@ public class EmployeeDto {
         this.age = age;
     }
 
-    public boolean isSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(boolean salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 }
