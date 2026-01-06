@@ -29,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return null; // save failed
+            return null;
         }
     }
 
@@ -55,5 +55,56 @@ public class EmployeeServiceImpl implements EmployeeService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public boolean updateEmployee(EmployeeDto employeeDto) {
+        String sql = "update employee set employee_name = ?, employee_age = ?, employee_salary = ? WHERE employee_nic = ?";
+
+        try {
+            Connection conn = DBConnection.getInstance().getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            pst.setString(1, employeeDto.getName());
+            pst.setInt(2, employeeDto.getAge());
+            pst.setDouble(3, employeeDto.getSalary());
+            pst.setString(4, employeeDto.getNic());
+
+            int affectedRows = pst.executeUpdate();
+
+            return affectedRows > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public EmployeeDto getEmployeeByNic(String nic) {
+        String sql = "SELECT * FROM employee WHERE employee_nic = ?";
+
+        try {
+
+            Connection conn = DBConnection.getInstance().getConnection();
+
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, nic);
+
+            var rs = pst.executeQuery();
+
+            if (rs.next()) {
+                String name = rs.getString("employee_name");
+                int age = rs.getInt("employee_age");
+                double salary = rs.getDouble("employee_salary");
+
+                return new EmployeeDto(name, nic, age, salary);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
