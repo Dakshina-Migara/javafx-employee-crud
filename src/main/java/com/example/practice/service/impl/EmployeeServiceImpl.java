@@ -6,6 +6,7 @@ import com.example.practice.service.EmployeeService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +14,17 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
+    //return the EmployeeDto object
+    //saveEmployee(EmployeeDto employeeDto) → Takes an EmployeeDto object as input
     public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
         String sql = "insert into employee(employee_name,employee_nic,employee_age,employee_salary) values (?,?,?,?)";
 
         try {
+            //call the DBConnection singleton to the get a live connection to the database
+            //conn represent the active connection to the mysql
             Connection conn = DBConnection.getInstance().getConnection();
+            //Allows you to safely insert dynamic values into the SQL query
+            //Prepares the SQL query for execution
             PreparedStatement pst = conn.prepareStatement(sql);
 
             pst.setString(1, employeeDto.getName());
@@ -25,7 +32,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             pst.setInt(3, employeeDto.getAge());
             pst.setDouble(4, employeeDto.getSalary());
 
-            pst.executeUpdate();
+            //send the data to the db
+            //execute the sql and returns number of rows affected
+            int i = pst.executeUpdate();
+            //return the employeeDto object
+            //return to the controller
             return employeeDto;
 
         } catch (SQLException e) {
@@ -42,7 +53,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         try {
             Connection conn = DBConnection.getInstance().getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
-            var rs = pst.executeQuery();
+
+            //get data from the db
+            ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
                 String name = rs.getString("employee_name");
