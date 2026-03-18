@@ -34,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
             //send the data to the db
             //execute the sql and returns number of rows affected
-            int i = pst.executeUpdate();
+            pst.executeUpdate();
             //return the employeeDto object
             //return to the controller
             return employeeDto;
